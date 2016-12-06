@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/4.0.6/rx.all.js"></script>
+    <style>
+        html,
+        body {
+            height: 100%;
+            background-color: #AAAAAA;
+        }
+        
+        #widget {
+            display: inline-block;
+            width: 100px;
+            height: 100px;
+            left: 100px;
+            background-color: #fff;
+            position: relative;
+            z-index: 1;
+        }
+        
+        #widget2 {
+            display: inline-block;
+            width: 50%;
+            height: 50%;
+            left: 200px;
+            background-color: red;
+            position: absolute;
+            z-index: 0;
+        }
+        
+        #tag {
+            background-color: #FFDD55;
+            position: relative;
+            width: 30%;
+        }
+        
+        .hide {
+            visibility: hidden;
+        }
+        
+        #xy {
+            position: relative;
+        }
+        
+        #widget:hover #tag,
+        #xy {
+            visibility: visible;
+            display: block;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div id="widget2">
+        <div id="widget">
+            <div id="tag" class="hide">drag</div>
+            <div id="xy" class="hide"></div>
+        </div>
+
+
+    </div>
+    <script>
+        var Observable = Rx.Observable;
+
+        var body = document.body;
+        var widget = document.getElementById("widget"),
+            widget2 = document.getElementById("widget2");
+        var xy = document.getElementById("xy");
+
+        var mouseDowns = Observable.fromEvent(widget, "mousedown");
+        var bodyMouseMoves = Observable.fromEvent(widget2, "mousemove");
+        var bodyMouseUps = Observable.fromEvent(widget2, "mouseup");
+
+        var drags =
+            mouseDowns.
+        map(function(e) {
+            return bodyMouseMoves.
+            takeUntil(bodyMouseUps);
+        }).
+        concatAll();
+
+        //xy.innerHTML = `x: ${widget2.style.left}px  y:${widget2.style.top}px`;
+
+        var subscription =
+            drags.forEach(
+                function onNext(e) {
+
+                    widget.style.left = (e.clientX - widget2.offsetLeft) + "px";
+                    widget.style.top = (e.clientY - widget2.offsetTop) + "px";
+                    xy.innerHTML = `x: ${widget.style.left}px  y:${widget.style.top}px`
+                },
+                function onError(error) {
+                    console.log('error');
+                },
+                function onCompleted() {
+                    xy.style.display = 'none';
+                    console.log("xy");
+                });
+    </script>
+</body>
+
+</html>

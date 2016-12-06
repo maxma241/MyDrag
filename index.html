@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.0/vue.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+    <style>
+        h1 {
+            text-align: center
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        {{msg}}
+        <br />
+        <my-component v-bind:test="myInput"></my-component>
+        <my-component :test="myInput"></my-component>
+        <my-component :test="myInput"></my-component>
+        <my-component :test="myInput"></my-component>
+        <div>
+            <nav v-for="person in people">
+                <h1>The age of {{person.name}} is {{person.age}}</h1>
+            </nav>
+        </div>
+        <input type="text" v-model="myInput" />
+        <input type="number"  />
+        <span>{{myInput}}</span>
+    </div>
+    <script>
+    myJson = {
+        people:[
+            {
+                name:"aaa",
+                age:20
+            },
+            {
+                name:"bbb",
+                age:21
+            },
+            {
+                name:"ccc",
+                age:11
+            }
+        ]
+    };
+     Vue.component('my-component', {
+        // 选项
+            props:['test'],
+            template:`<div>{{test}}</div>`
+        });
+        new Vue({
+            el:'#app',
+            data:{
+                msg:"this is my vue practice",
+                people:myJson.people,
+                myInput:"test for properties"
+            },
+            methods:{
+
+            }
+        });
+       $.get("http://www.whatsmedia.com:32394/ApiHelper/Read")
+.done((res)=>{
+  
+})
+.fail((e)=>{
+  console.log(e);
+});
+    </script>
+</body>
+</html>
