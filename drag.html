@@ -20,6 +20,7 @@
             background-color: #fff;
             position: relative;
             z-index: 1;
+            cursor: move;
         }
         
         #widget2 {
@@ -93,7 +94,7 @@
 
                     widget.style.left = (e.clientX - widget2.offsetLeft) + "px";
                     widget.style.top = (e.clientY - widget2.offsetTop) + "px";
-                    xy.innerHTML = `x: ${widget.style.left}px  y:${widget.style.top}px`
+                    xy.innerHTML = `x: ${widget.style.left}  y:${widget.style.top}`
                 },
                 function onError(error) {
                     console.log('error');

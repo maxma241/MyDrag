@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <style>
+        .drag-area {
+            width: 350px;
+            height: 150px;
+            padding: 10px;
+            border: 6px solid #aaaaaa;
+        }
+        
+        .drag-div {
+            display: inline-block;
+            width: 35px;
+            height: 30px;
+            padding: 10px;
+            border: 1px solid #bbbbbb;
+            cursor: move;
+        }
+        
+        .drop-div {
+            display: inline-block;
+            width: 35px;
+            height: 30px;
+            padding: 10px;
+            border: 1px double #000000;
+        }
+        
+        #div2 {
+            vertical-align: middle;
+            text-align: center;
+        }
+        
+        #div1 div {
+            cursor: pointer;
+        }
+        
+        #div2 div {
+            margin: auto;
+            width: 50%;
+            height: 80%;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+    </script>
+</head>
+
+<body>
+
+    <p>Drag Testing</p>
+
+    <div id="myDrag" class="drag-div" draggable="true" ondragstart="drag(event)">Drag1</div>
+    <div id="myDrag2" class="drag-div" draggable="true" ondragstart="drag(event)">Drag2</div>
+    <br>
+    <span>排你要的</span>
+    <div class="drag-area" id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+
+    <span>放你要的</span>
+    <div class="drag-area" id="div2" ondrop="drop2(event)" ondragover="allowDrop2(event)"></div>
+    <script src="js/htmlDrag.js"></script>
+</body>
+
+</html>
