@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css" />
+    <script src="http://rubaxa.github.io/Sortable/Sortable.js"></script>
+    <style>
+        .div-my-list {
+            margin: 30px;
+        }
+        
+        .left-list {
+            margin-right: 80%;
+        }
+        
+        .right-list {
+            margin-left: 80%;
+        }
+        
+        ul {
+            list-style: none;
+        }
+        
+        .my-handle {
+            cursor: move;
+            cursor: -webkit-grabbing;
+        }
+        
+        .my-handle:active {
+            cursor: move;
+            color: dodgerblue;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="row" style="padding-top:50px">
+        <div class="col-md-3">
+            <div class="panel panel-default" style="margin-left:5%;">
+                <div class="panel-heading ">Elements</div>
+                <div class="panel-body">
+                    <ul id="listwithhandle" class="list-group">
+                        <li class="list-group-item" draggable="false"><span class="my-handle icon ion-navicon-round"></span> element No.1</li>
+                        <li class="list-group-item" draggable="false"><span class="my-handle icon ion-navicon-round"></span> element No.2</li>
+                        <li class="list-group-item" draggable="false"><span class="my-handle icon ion-navicon-round"></span> element No.3</li>
+                        <li class="list-group-item" draggable="false"><span class="my-handle icon ion-navicon-round"></span> element No.4</li>
+                        <li class="list-group-item" draggable="false"><span class="my-handle icon ion-navicon-round"></span> element No.5</li>
+                        <li class="list-group-item" draggable="false"><span class="my-handle icon ion-navicon-round"></span> 報表#1</li>
+                        <li class="list-group-item" draggable="false"><span class="my-handle icon ion-navicon-round"></span> 報表#2</li>
+                        <li class="list-group-item" draggable="false"><span class="my-handle icon ion-navicon-round"></span> XXX圖表</li>
+                        <li class="list-group-item" draggable="false"><span class="my-handle icon ion-navicon-round"></span> 我是文字</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-default" style="margin-right:5%;">
+                <div class=" panel-heading ">Page</div>
+                <div class="panel-body ">
+                    <ul id="bankelements" class="list-group" style="min-height:30px;">
+                        <!--<li class="list-group-item "><span class="my-handle pageicon ion-navicon-round "></span> list no.1</li>
+                        <li class="list-group-item "><span class="my-handle icon ion-navicon-round "></span> list no.2</li>-->
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        Sortable.create(listwithhandle, {
+            sort: false,
+            group: {
+                name: 'elements',
+                pull: 'clone'
+            },
+            animation: 150
+        });
+        Sortable.create(bankelements, {
+            handle: '.my-handle',
+            group: {
+                name: 'page',
+                put: 'elements'
+            },
+            animation: 150
+        });
+    </script>
+</body>
+
+</html>
